@@ -4227,7 +4227,8 @@
     },
     "needsAttention": "Dikkat edilmesi gerekiyor",
     "back": "Geri",
-    "noAppsFound": "\"{{filter}}\" ile eşleşen uygulama bulunamadı."
+    "noAppsFound": "\"{{filter}}\" ile eşleşen uygulama bulunamadı.",
+    "searchApps": "Uygulama ara"
   },
   "appsPage": {
     "showInSidebar": "Kenar çubuğunda {{name}}'yi göster",

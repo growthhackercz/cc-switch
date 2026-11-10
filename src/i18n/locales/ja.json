@@ -4287,7 +4287,8 @@
     },
     "needsAttention": "対応が必要",
     "back": "戻る",
-    "noAppsFound": "\"{{filter}}\" に一致するアプリが見つかりません。"
+    "noAppsFound": "\"{{filter}}\" に一致するアプリが見つかりません。",
+    "searchApps": "アプリを検索"
   },
   "appsPage": {
     "showInSidebar": "{{name}} をサイドバーに表示",

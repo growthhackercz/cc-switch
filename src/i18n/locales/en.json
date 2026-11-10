@@ -4287,7 +4287,8 @@
     },
     "needsAttention": "Needs attention",
     "back": "Back",
-    "noAppsFound": "No apps match \"{{filter}}\"."
+    "noAppsFound": "No apps match \"{{filter}}\".",
+    "searchApps": "Search apps"
   },
   "appsPage": {
     "showInSidebar": "Show {{name}} in the sidebar",

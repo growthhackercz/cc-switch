@@ -4288,7 +4288,8 @@
     },
     "needsAttention": "需要處理",
     "back": "返回",
-    "noAppsFound": "找不到符合 \"{{filter}}\" 的應用。"
+    "noAppsFound": "找不到符合 \"{{filter}}\" 的應用。",
+    "searchApps": "搜尋應用"
   },
   "appsPage": {
     "showInSidebar": "在側欄顯示 {{name}}",

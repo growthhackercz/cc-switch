@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState, type ComponentType } from "react";
+import { useRef, useState, type ComponentType } from "react";
 import { useTranslation } from "react-i18next";
 import { useQuery } from "@tanstack/react-query";
 import { getVersion } from "@tauri-apps/api/app";
@@ -235,16 +235,12 @@ function MainDirectory({
   );
   const onAppPage = isAppPage(view);
 
-  // Hledání aplikací v postranním panelu
-  const [filter, setFilter] = useState<string>("");
-  const filteredApps = useMemo(() => {
-    if (!filter) return apps;
-    const lowercaseFilter = filter.toLowerCase();
-    return apps.filter((app) => {
-      const name = APP_DISPLAY_NAME[app]?.toLowerCase() || "";
-      return name.includes(lowercaseFilter);
-    });
-  }, [filter, apps]);
+  const [filter, setFilter] = useState("");
+  const normalizedFilter = filter.trim().toLowerCase();
+  // Keep every visible app reachable when the search field is hidden in the icon rail.
+  const filteredApps = collapsed || !normalizedFilter
+    ? apps
+    : apps.filter((app) => APP_DISPLAY_NAME[app].toLowerCase().includes(normalizedFilter));
 
   // 选了的项里是 0 的不写（没配定价时金额总是 0）；命中率在今天还没有请求时不写；
   // 全都没有就整个不显示。两项都有时只写数、上下两行（「今日」放进悬停和读屏）：
@@ -316,7 +312,7 @@ function MainDirectory({
           collapsed && "no-scrollbar",
         )}
       >
-        {/* 应用搜索：过滤应用列表实时，空查询 = všechny */}
+        {/* Filter only the app list, never the global navigation. */}
         <div
           className={cn(
             "flex shrink-0 items-center gap-2 px-2 pb-2",
@@ -326,6 +322,8 @@ function MainDirectory({
           <SearchField
             value={filter}
             onValueChange={setFilter}
+            aria-label={t("nav.searchApps")}
+            placeholder={t("nav.searchApps")}
             clearLabel={t("common.clear")}
             containerClassName="w-full"
           />
@@ -345,9 +343,9 @@ function MainDirectory({
               onSelect={() => onSelectApp(app)}
             />
           ))}
-          {filteredApps.length === 0 && (
-            <div className="px-4 py-2 text-caption text-fg-3">
-              {t("nav.noAppsFound", { filter })}
+          {!collapsed && normalizedFilter && filteredApps.length === 0 && (
+            <div role="status" className="px-4 py-2 text-caption text-fg-3">
+              {t("nav.noAppsFound", { filter: filter.trim() })}
             </div>
           )}
         </div>
